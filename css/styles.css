@@ -22,3 +22,10 @@ body {
   margin: 0;
   font-family: sans-serif;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.625rem;
+}

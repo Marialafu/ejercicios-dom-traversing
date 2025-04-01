@@ -81,7 +81,6 @@ let counterClicks = 0;
 
 const countClicks = () => {
   counterClicks++;
-
   clickMeButtonElement.textContent = `Cliked ${counterClicks} times`;
 };
 
@@ -91,4 +90,77 @@ clickMeButtonElement.addEventListener('click', countClicks);
 
 // - Crea un p con el texto "esperando entrada de teclado..." al pulsar cualquier tecla deberá poner "has pulsado la tecla tal" y al soltarla el <p> volverá a tener el texto "esperando entrada de teclado...". Como reto extra puedes intentar añadir si se ha usado una combinación de teclas con alt, shift o control.
 
+let keyboardText = document.getElementById('keyboard-info')
+
+const keyboardKeyPressed = event => {
+
+  keyboardText.textContent = `Has pulsado la tecla ${event.key}`
+  
+}
+document.addEventListener('keydown', keyboardKeyPressed);
+
 // - Crea un array con 5 palabras, las que tú quieras. Añade un h2 a tu HTML. Añade dos botones con el texto previous y next respectívamente. Haz que los botones cambien el texto del h2 con las palabras del array, cuando llegues a la última volverás a la primera al pulsar el botón next y cuando estés en la primera podrás volver a la última haciendo click al botón previous.
+
+
+
+//Primer intento
+
+// wordChange.children[1].textContent = wordsList[0]
+
+// const previousWord = (wordsList) => {
+
+//   if (wordChange.children[1].textContent === wordsList[0]){
+//     wordChange.children[1].textContent = wordsList[1]
+//   }
+  
+// }
+// wordChange.children[0].addEventListener('click', (event) => previousWord(wordsList))
+
+// const nextWord = (wordsList) => {
+
+//   if (wordChange.children[1].textContent === wordsList[1]){
+//     wordChange.children[1].textContent = wordsList[0]
+//   }
+// }
+// wordChange.children[2].addEventListener('click', (event) => nextWord(wordsList))
+
+
+
+
+//Segundo intento
+
+//Si intento generar una variable no me deja
+// let wordLoop = wordChange.children[1].textContent
+// wordLoop = wordsList[0]
+
+const wordChange = document.getElementById('word-change')
+wordsList = ['Holi', 'Peperoni', 'Pizza', 'Tengo', 'Hambre']
+
+let wordPositionInList = 0;
+
+wordChange.children[1].textContent = wordsList[wordPositionInList]
+
+const nextWord = () => {
+
+  if (wordPositionInList < wordsList.length - 1){
+    wordPositionInList++
+  } else {wordPositionInList = 0}
+
+  wordChange.children[1].textContent = wordsList[wordPositionInList]
+  //No entiendo como coje las directrices del if si no está dentro.¿Es por que se ejecuta toda la función?
+}
+wordChange.children[2].addEventListener('click',nextWord)
+
+const previousWord = () => {
+
+  if (wordPositionInList > 0){
+    wordPositionInList--
+  } else {wordPositionInList = wordsList.length-1}
+
+  wordChange.children[1].textContent = wordsList[wordPositionInList]
+
+}
+wordChange.children[0].addEventListener('click', previousWord)
+
+//Se podría hacer una función general de presionar botón y que dentro tuviera los dos eventos?
+//Qué es event target???
