@@ -90,14 +90,27 @@ clickMeButtonElement.addEventListener('click', countClicks);
 
 // - Crea un p con el texto "esperando entrada de teclado..." al pulsar cualquier tecla deberá poner "has pulsado la tecla tal" y al soltarla el <p> volverá a tener el texto "esperando entrada de teclado...". Como reto extra puedes intentar añadir si se ha usado una combinación de teclas con alt, shift o control.
 
+//ctrlKey, altKey, shiftKey, metaKey(logo windows)
+
 let keyboardText = document.getElementById('keyboard-info')
 
 const keyboardKeyPressed = event => {
 
-  keyboardText.textContent = `Has pulsado la tecla ${event.key}`
-  
+  if (event.ctrlKey){
+   keyboardText.textContent = `Has usado una combinación de teclas con Control y ${event.key}`
+  } else if (event.altKey){
+    keyboardText.textContent = `Has usado una combinación de teclas con Alt y ${event.key}`
+  } else if (event.shift){
+    keyboardText.textContent = `Has usado una combinación de teclas con Shift y ${event.key}`
+  } else {keyboardText.textContent = `Has pulsado la tecla ${event.key}`}
+
 }
 document.addEventListener('keydown', keyboardKeyPressed);
+
+const keyboardKeyUnpressed = () => {
+  keyboardText.textContent = `Esperando entrada de teclado...`
+}
+document.addEventListener('keyup', keyboardKeyUnpressed)
 
 // - Crea un array con 5 palabras, las que tú quieras. Añade un h2 a tu HTML. Añade dos botones con el texto previous y next respectívamente. Haz que los botones cambien el texto del h2 con las palabras del array, cuando llegues a la última volverás a la primera al pulsar el botón next y cuando estés en la primera podrás volver a la última haciendo click al botón previous.
 
